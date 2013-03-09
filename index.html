@@ -1,66 +1,125 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Feng4ever.com by feng4ever</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>FENG4EVER / CHRIS.C</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="feng4ever.com js weibo">
+  <meta name="author" content="feng4ever">
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-  </head>
-  <body>
-    <div class="wrapper">
-      <header>
-        <h1>Feng4ever.com</h1>
-        <p></p>
+  <!-- Le styles -->
+  <link href="css/bootstrap.12.min.css" rel="stylesheet">
 
-        <p class="view"><a href="https://github.com/feng4ever/feng4ever.com">View the Project on GitHub <small>feng4ever/feng4ever.com</small></a></p>
+  <style>
+    body {font-family: "微软雅黑";color:#000;text-align:center;/*background:transparent url(img/body.png) no-repeat -100px top ;*/}
+    a{color:#999;text-decoration: underline;}
 
+    a.cc {margin-top:40px;height:300px;background:transparent url(img/logo.png) no-repeat center center ;}
+    nav.cc,footer.cc {border-bottom:1px solid rgba(0,0,0,0.1);border-top:1px solid rgba(0,0,0,0.1);padding:4px 0;}
+    nav.cc h2{font-size:18px;line-height:30px;font-weight: normal;color:#CCC}
+    footer.cc a{font-size:18px;line-height:40px;font-weight: normal;color:#666}
+    .navbar .brand{display:none;}
+    .navbar-inverse .btn-navbar{background: #000;border-width:0;box-shadow:none}
+    .navbar-inverse .navbar-inner{background: #000;border-width:0;box-shadow: none}
+    .navbar-fixed-top{/*position: relative;*/}
+    .WB_loginButton a.login_b {line-height: 40px;color:#FFF;}
+    section.cc{padding-top: 40px;padding-bottom:20px;}
+    article.cc{margin-bottom:40px;}
+    article.cc h4{font-weight:bold; }
+    article.cc aside h5{font-weight:normal; color:#CCC;text-align:right;}
+    article.cc aside h6{font-weight:normal; color:rgba(122,122,122,0.5);text-align:right;}
+    .footer-links{margin-bottom:160px;line-height:60px;color:#CCC}
+    dd{margin:0;margin-bottom:10px;}
+    dd:hover span{display: inline}
+    dd span{display: none}
+    blockquote p{font-size:14px;line-height: 20px;}
+    #users_show{position: relative;}
+    #users_show img{position:absolute;left:-70px;top:-10px;}
+    a.cc{
+      display: block;}
+   i {
+      -webkit-animation-name: idle; 
+      -webkit-animation-duration: 1s;
+      -webkit-animation-timing-function: ease-out;  
+      -webkit-animation-direction: alternate;  
+      -webkit-animation-iteration-count: 99999;  
+    }
+    @-webkit-keyframes idle {  
+        0% {opacity:0; }  
+        100% {opacity:100;}  
+    }  
+    @media (min-width: 980px){
+        /*body>a.cc {background-position:60px center ;}*/  
+        .navbar .nav{float:right}
+    }
+    @media (max-width: 979px){
+        body{/*background:transparent url(img/body.png) no-repeat -200px top ;*/}
+        body>a.cc {margin-top:0;height:320px;background-position:center center ;}
+        .navbar .nav{padding:0 15px}
+        .navbar .brand{margin-left:5px;}
 
-        <ul>
-          <li><a href="https://github.com/feng4ever/feng4ever.com/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/feng4ever/feng4ever.com/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/feng4ever/feng4ever.com">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
-      <section>
-        <h3>Welcome to GitHub Pages.</h3>
+    }
+    @media (max-width: 767px){
+        body{/*background:transparent url(img/body.png) no-repeat -300px top ;*/}
+        body>a.cc a.page-next {float: right}
+        body>a.cc a.page-prev {float: left}
+        body>a.cc {height:220px;background:transparent url(img/logo.png) no-repeat center center ;}
+        body>nav.cc h2{text-align: center}
+    }
+  </style>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+  <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+<!--[if IE 6]>    
+        <link href="css/ie6.min.css" rel="stylesheet">
+      <![endif]-->
+  <!-- Le fav and touch icons -->
+  <link rel="shortcut icon" href="ico/favicon.ico">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png"></head>
+<body>
+  <!--
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
-
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
-
-<h3>Designer Templates</h3>
-
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
-
-<h3>Rather Drive Stick?</h3>
-
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
-
-<h3>Authors and Contributors</h3>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
-
-<h3>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-      </section>
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/feng4ever">feng4ever</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-      </footer>
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        <a class="brand " href="#"> <b>CHRIS.C</b>
+        </a>
+        <div id="wb_connect_btn" class="pull-left"></div>
+        <div class="nav-collapse collapse">
+          <ul class="nav">
+            <li class="active" >
+              <a href="?" >MLAB</a>
+            </li>
+          </ul>
+        </div>
+        
+         </div>
     </div>
-    <script src="javascripts/scale.fix.js"></script>
-    
-  </body>
+  </div>
+  -->
+  <a class="cc container" href="http://masklab.net"></a>
+  <a class="container" href="http://masklab.net"><small>MORE</small><br/><i class="icon-chevron-down"></i></a>
+
+  <!-- Le javascript
+    ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="js/jquery.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/ie6.min.js"></script>
+  <script src="js/jquery.tmpl.min.js"></script>
+
+
+  
+
+</body>
 </html>
