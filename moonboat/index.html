@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Flat UI Free</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="dist/css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="dist/css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="dist/img/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="dist/js/vendor/html5shiv.js"></script>
+      <script src="dist/js/vendor/respond.min.js"></script>
+    <![endif]-->
+    <style>
+    .tile img,.tile p{display:none;}
+    .show0 .show0,.show1 .show1,.show2 .show2{display:inline;}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+    <br/>
+    <div class="row demo-row">
+        <div class="col-xs-12">
+          <nav class="navbar navbar-inverse navbar-embossed" role="navigation">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
+                <span class="sr-only">Toggle navigation</span>
+              </button>
+              <a class="navbar-brand" href="#">IDF Moon Boat Demo</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse-01">
+              <ul class="nav navbar-nav navbar-left">
+                
+                
+                <li><a href="https://software.intel.com/zh-cn/articles/moon_boat_project">About Us</a></li>
+               </ul>
+               
+            </div><!-- /.navbar-collapse -->
+          </nav><!-- /navbar -->
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="row">
+            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3" >
+              <div class="tile show0"  id="water">
+                <img src="img/icons/png/water0.png" alt="Dry" class="tile-image big-illustration show0">
+                <img src="img/icons/png/water1.png" alt="Wetting" class="tile-image big-illustration show1">
+                <h3 class="tile-title">Diapers Status</h3>
+                <p class="show0">Dry</p>
+                <p class="show1">Wetting</p>
+               
+              </div>
+            </div>
+
+            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+              <div class="tile show0" id="zpos">
+                <img src="img/icons/png/zpos0.png" alt="Infinity-Loop" class="tile-image show0">
+                <img src="img/icons/png/zpos1.png" alt="Infinity-Loop" class="tile-image show1">
+                <h3 class="tile-title">Sleeping Position</h3>
+                <p class="show0">OK</p>
+                <p class="show1">Need Turn over</p>
+              </div>
+            </div>
+
+            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+              <div class="tile show0" id="temp">
+                <img src="img/icons/png/temp0.png" alt="Pensils" class="tile-image show0">
+                <img src="img/icons/png/temp1.png" alt="Pensils" class="tile-image show1">
+                <img src="img/icons/png/temp2.png" alt="Pensils" class="tile-image show2">
+                <h3 class="tile-title">Temperature</h3>
+                <p class="show0">Comfortable</p>
+               	 <p class="show1">Too Cold</p>
+               	  <p class="show2">Too Warm</p>
+              </div>
+            </div>
+
+            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+              <div class="tile show0" id="sound">
+                
+                <img src="img/icons/png/sound0.png" alt="Chat" class="tile-image show0">
+                 <img src="img/icons/png/sound1.png" alt="Chat" class="tile-image show1">
+                 
+                <h3 class="tile-title">Babyeep</h3>
+                <p class="show0">Silently</p>
+               	 <p class="show1">Noicy</p>
+              </div>
+
+            </div>
+          </div> <!-- /row -->
+        </div>
+      </div> <!-- /row -->
+      <p class="small">
+      Powered By Intel® Enableiot 
+      </p>
+    </div><!-- /.container -->
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="dist/js/vendor/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="dist/js/flat-ui.min.js"></script>
+
+    <script src="docs/assets/js/application.js"></script>
+
+<script type="text/javascript">
+  
+  data={
+  "from": 1460169234110,
+  "to": 1460255634110,
+  "maxItems": 10,
+  "series": [
+    {
+      "deviceId": "0e-43-2c-c4-ac-72",
+      "deviceName": "0e-43-2c-c4-ac-72-NAME",
+      "componentId": "4d79d5c7-1454-4643-a140-eb8a91e51451",
+      "componentName": "water",
+      "componentType": "water.v1.0",
+      "attributes": {},
+      "points": [
+        {
+          "ts": "1460201443496",
+          "value": "0"
+        },
+        {
+          "ts": "1460205341072",
+          "value": "1"
+        }
+      ]
+    },
+    {
+      "deviceId": "0e-43-2c-c4-ac-72",
+      "deviceName": "0e-43-2c-c4-ac-72-NAME",
+      "componentId": "d8713db7-c4b2-4bcb-b6b6-190963914c1d",
+      "componentName": "zpos",
+      "componentType": "position.v1.0",
+      "attributes": {},
+      "points": [
+        {
+          "ts": "1460201442365",
+          "value": "1"
+        },
+        {
+          "ts": "1460205341082",
+          "value": "0"
+        }
+      ]
+    },
+    {
+      "deviceId": "0e-43-2c-c4-ac-72",
+      "deviceName": "0e-43-2c-c4-ac-72-NAME",
+      "componentId": "7b19036b-6e39-4335-b2c4-c7958291ddb5",
+      "componentName": "temp",
+      "componentType": "temperature.v1.0",
+      "attributes": {},
+      "points": [
+        {
+          "ts": "1460201442583",
+          "value": "3.4016"
+        },
+        {
+          "ts": "1460205341067",
+          "value": "29.0175"
+        }
+      ]
+    },
+    {
+      "deviceId": "0e-43-2c-c4-ac-72",
+      "deviceName": "0e-43-2c-c4-ac-72-NAME",
+      "componentId": "2d7691b1-d664-47d7-959a-4dcfd9398551",
+      "componentName": "sound",
+      "componentType": "sound.v1.0",
+      "attributes": {},
+      "points": [
+        {
+          "ts": "1460201443500",
+          "value": "1422.628"
+        },
+        {
+          "ts": "1460205341077",
+          "value": "214.7485"
+        }
+      ]
+    }
+  ]
+};
+
+$(function(){
+
+  $.each( data.series, function( key, value ) {
+    console.log(key)
+     
+     //$(".tile").eq(key).find("p").text(value.points[0].value);
+     $(".tile").eq(key).removeClass("show0 show1 show2");
+    if(key==2){
+      if(value.points[0].value<10) {
+        $(".tile").eq(key).addClass("show"+1);
+      } else if(value.points[0].value>30) {
+        $(".tile").eq(key).addClass("show"+2);
+      }else{
+        $(".tile").eq(key).addClass("show"+0);
+      }
+    
+
+
+    }else if(key==3){
+     if(value.points[0].value>300) {
+      $(".tile").eq(key).addClass("show"+1);
+      }else{
+        $(".tile").eq(key).addClass("show"+0);
+      }
+      
+    }else{
+      $(".tile").eq(key).addClass("show"+value.points[0].value);
+
+    }
+     
+     
+});
+
+
+
+
+});
+</script>
+  </body>
+</html>
