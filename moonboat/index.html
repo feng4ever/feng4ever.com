@@ -158,7 +158,10 @@ $("#login").show();
 $("#dashboard").hide();
 
 
-
+pullData();
+    interval=setInterval(function(){
+      pullData();
+    },config.moonboat.interval)
 
 $("#submit").click(function(){
   config.target.password=$("#password").val();
