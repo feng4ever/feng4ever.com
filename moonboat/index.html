@@ -11,33 +11,37 @@
     <!-- Loading Flat UI -->
     <link href="dist/css/flat-ui.css" rel="stylesheet">
 
-    <link rel="shortcut icon" href="dist/img/favicon.ico">
+   
 
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
-    <!--[if lt IE 9]>
-      <script src="dist/js/vendor/html5shiv.js"></script>
-      <script src="dist/js/vendor/respond.min.js"></script>
-    <![endif]-->
     <style>
     .tile img,.tile p{display:none;}
     .show0 .show0,.show1 .show1,.show2 .show2{display:inline;}
+    .showdata{display:none;}
     </style>
   </head>
   <body>
     <div class="container">
     <br/>
+
+    
     <div class="row demo-row">
         <div class="col-xs-12">
           <nav class="navbar navbar-inverse navbar-embossed" role="navigation">
             <div class="navbar-header">
              
-              <a class="navbar-brand" ><img  src="img/IDF.png" /> IDF Moon Boat Demo</a>
+              <a class="navbar-brand" ><img  src="img/IDF.png" /></a>
+              <a class="navbar-brand pull-right">Moon Boat Demo<a>
             </div>
           </nav><!-- /navbar -->
         </div>
       </div>
- 
-      <div class="row">
+      <div id="login">
+      <input id="password" type="text" value="" placeholder="Enter Password" class="form-control">
+      <br/>
+      <a id="submit" href="#fakelink" class="btn btn-block btn-lg btn-primary">Login</a>
+       <br/> <br/>
+      </div>
+      <div class="row" id="dashboard">
         <div class="col-lg-12">
           <div class="row">
             <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3" >
@@ -47,6 +51,7 @@
                 <h3 class="tile-title">Diapers Status</h3>
                 <p class="show0">Dry</p>
                 <p class="show1">Wetting</p>
+                <span class="showdata"></span>
                
               </div>
             </div>
@@ -58,6 +63,7 @@
                 <h3 class="tile-title">Sleeping Position</h3>
                 <p class="show0">OK</p>
                 <p class="show1">Need Turn over</p>
+                 <span class="showdata"></span>
               </div>
             </div>
 
@@ -68,8 +74,9 @@
                 <img src="img/icons/png/temp2.png" alt="Pensils" class="tile-image show2">
                 <h3 class="tile-title">Temperature</h3>
                 <p class="show0">Comfortable</p>
-               	 <p class="show1">Too Cold</p>
-               	  <p class="show2">Too Warm</p>
+               	<p class="show1">Too Cold</p>
+               	<p class="show2">Too Warm</p>
+                 <span class="showdata"></span>
               </div>
             </div>
 
@@ -82,14 +89,16 @@
                 <h3 class="tile-title">Babyeep</h3>
                 <p class="show0">Silently</p>
                	 <p class="show1">Noicy</p>
+                  <span class="showdata"></span>
               </div>
 
             </div>
           </div> <!-- /row -->
         </div>
       </div> <!-- /row -->
-      <p class="small">Powered By Intel® Enableiot
-      <a href="https://software.intel.com/zh-cn/articles/moon_boat_project" class="pull-right">About Us</a>
+      <p class="small">Powered By Intel® Enableiot <span id="ts"></span>
+      <a  href="http://feng4ever.com" class="pull-right"> @Chris.C </a>
+     
       </p>
     </div><!-- /.container -->
 
@@ -99,97 +108,154 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="dist/js/flat-ui.min.js"></script>
 
-    <script src="docs/assets/js/application.js"></script>
+    
 
 <script type="text/javascript">
-  
-  data={
-  "from": 1460169234110,
-  "to": 1460255634110,
-  "maxItems": 10,
-  "series": [
-    {
-      "deviceId": "0e-43-2c-c4-ac-72",
-      "deviceName": "0e-43-2c-c4-ac-72-NAME",
-      "componentId": "4d79d5c7-1454-4643-a140-eb8a91e51451",
-      "componentName": "water",
-      "componentType": "water.v1.0",
-      "attributes": {},
-      "points": [
-        {
-          "ts": "1460201443496",
-          "value": "0"
-        },
-        {
-          "ts": "1460205341072",
-          "value": "1"
-        }
-      ]
-    },
-    {
-      "deviceId": "0e-43-2c-c4-ac-72",
-      "deviceName": "0e-43-2c-c4-ac-72-NAME",
-      "componentId": "d8713db7-c4b2-4bcb-b6b6-190963914c1d",
-      "componentName": "zpos",
-      "componentType": "position.v1.0",
-      "attributes": {},
-      "points": [
-        {
-          "ts": "1460201442365",
-          "value": "1"
-        },
-        {
-          "ts": "1460205341082",
-          "value": "0"
-        }
-      ]
-    },
-    {
-      "deviceId": "0e-43-2c-c4-ac-72",
-      "deviceName": "0e-43-2c-c4-ac-72-NAME",
-      "componentId": "7b19036b-6e39-4335-b2c4-c7958291ddb5",
-      "componentName": "temp",
-      "componentType": "temperature.v1.0",
-      "attributes": {},
-      "points": [
-        {
-          "ts": "1460201442583",
-          "value": "3.4016"
-        },
-        {
-          "ts": "1460205341067",
-          "value": "29.0175"
-        }
-      ]
-    },
-    {
-      "deviceId": "0e-43-2c-c4-ac-72",
-      "deviceName": "0e-43-2c-c4-ac-72-NAME",
-      "componentId": "2d7691b1-d664-47d7-959a-4dcfd9398551",
-      "componentName": "sound",
-      "componentType": "sound.v1.0",
-      "attributes": {},
-      "points": [
-        {
-          "ts": "1460201443500",
-          "value": "1422.628"
-        },
-        {
-          "ts": "1460205341077",
-          "value": "214.7485"
-        }
-      ]
-    }
-  ]
-};
+
 
 $(function(){
+var data;
+var interval;
+var config={
+    "target": {
+      "host": "dashboard.us.enableiot.com",
+      "api_root": "/v1/api",
+      "username": "feng4ever@msn.com",
+      "password": "",
+      "account": "account",
+      "accountId":"ee4f618b-186c-44a0-89a7-aabb902b83e2",
+      //neil"accountId":"31a379c5-a189-4097-b203-d994f1f48045",
+      "token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJqdGkiOiI5ODhjYTA0Ny1hOTk1LTRiMWQtODY5ZC1jYTRlMmU0ODY0Y2MiLCJpc3MiOiJodHRwOi8vZW5hYmxlaW90LmNvbSIsInN1YiI6IjU3MDhmZDFlYjQyMWY4YzYzZTY2NzMwNCIsImV4cCI6IjIwMTYtMDQtMTBUMTM6MTU6MDQuODk1WiJ9.Id9zeh_W1bn_HQSKHKgwPAk-Uxz4tEPmRKhH1Ohfrx_RzRT-3jdmuP9L7ar-IgKB6TuNWIBwMP5vQ1pvFCu98G9GEVB-BUyl53salQ6iH0VBLcQZjKdT1ToRVa71llX5DuyYe7rEz3ZDqGO9hTFxSq6VxA-Rs3Wl6oK-U5hBGEyy2l88gCYrw65tKle9wKOCxyWPBk-0CO-LdBlnStmfp7VDvIddbyckEusuu-AZfI382CSmTeqExpQLWvrXgJfdtMN0LDpnNKtNofZNApYAN9MILHVEc8wdk2capDwQZjAqzFJiOGsXlbsIqlOSqRU2_wPMsQdDdi0Vy67ecGolKA"
+    },
+    "source": {
+      "deviceId": "0e-43-2c-c4-ac-72",
+      "gatewayId": "desired-device-id",
+      "name": "desired-device-name",
+      "tags": ["tag1", "tag2", "tag3"],
+      "loc": [ 45.5228, -122.9897, 75.2 ],
+      "attributes" : {
+        "manufacturer": "intel",
+        "platform": "x86",
+        "os": "linux"
+      }
+    },
+    "component": {
+      "type": "SampleComponentName.v1.0",
+      "name": "desired-sensor-name",
+      "cid": "desired-sensor-id"
+    },
+    "moonboat": {
+      "interval": 5000,
+
+    }
+
+}
+
+
+
+
+$("#login").show();
+$("#dashboard").hide();
+
+
+
+
+$("#submit").click(function(){
+  config.target.password=$("#password").val();
+  if(config.target.password){
+    getToken(
+      "/auth/token",
+      {"username": config.target.username,"password": config.target.password},
+        function(msg){
+          console.log(msg);
+          config.target.token=msg.token;
+          $("#login").hide();
+          $("#dashboard").show();
+          pullData();
+          interval=setInterval(function(){
+             pullData();
+          },config.moonboat.interval)
+        }
+      );
+
+  }else{
+    pullData();
+    interval=setInterval(function(){
+      pullData();
+    },config.moonboat.interval)
+  }
+
+
+
+
+})
+
+
+
+    function getToken(url,data,success) {
+        $.ajax({
+            type: "POST",
+            contentType: "application/x-www-form-urlencoded",
+            url: "https://"+config.target.host+config.target.api_root+url,
+            data: data,
+
+            success: success,
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+              alert("Login error");
+                $("#login").show();
+                $("#dashboard").hide();
+            }
+        });
+    }
+    function sendAJAX(url,data,success) {
+        $.ajax({
+            
+            type: "POST",
+            contentType: "application/json",
+            
+            url: "https://"+config.target.host+config.target.api_root+url,
+            data: data,
+            processData: false,
+            success: success,
+            headers: {
+            Authorization: "Bearer "+config.target.token
+            },
+
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                alert("Disconnected. ");
+                clearInterval(interval);
+                $("#login").show();
+                $("#dashboard").hide();
+            }
+        });
+    }
+    function pullData(){
+
+      sendAJAX(
+            "/accounts/"+config.target.accountId+"/data/search",
+            '{"from":-86400,"targetFilter":{"deviceList":["0e-43-2c-c4-ac-72"]},"metrics":[{"id":"7b19036b-6e39-4335-b2c4-c7958291ddb5","op":"none"},{"id":"temp","op":"none"},{"id":"4d79d5c7-1454-4643-a140-eb8a91e51451","op":"none"},{"id":"water","op":"none"},{"id":"d8713db7-c4b2-4bcb-b6b6-190963914c1d","op":"none"},{"id":"zpos","op":"none"},{"id":"2d7691b1-d664-47d7-959a-4dcfd9398551","op":"none"},{"id":"sound","op":"none"}],"maxItems":100}'
+
+            ,
+            function(msg){
+              console.log(msg);
+              displayData(msg);
+              }
+            )
+    }
+    function displayData(data){
+      $("#login").hide();
+       $("#dashboard").show();
 
   $.each( data.series, function( key, value ) {
-    console.log(key)
      
      //$(".tile").eq(key).find("p").text(value.points[0].value);
-     $(".tile").eq(key).removeClass("show0 show1 show2");
+    $(".tile").eq(key).removeClass("show0 show1 show2");
+     $(".tile").eq(key).find(".showdata").text(value.points[0].value)
+    $(".tile").eq(key).click(function(){
+      
+      
+      $(this).find(".showdata").toggle();
+    });
     if(key==2){
       if(value.points[0].value<10) {
         $(".tile").eq(key).addClass("show"+1);
@@ -214,7 +280,11 @@ $(function(){
     }
      
      
-});
+    });
+
+    }
+
+
 
 
 
