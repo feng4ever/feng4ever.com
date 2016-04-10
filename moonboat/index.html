@@ -46,11 +46,11 @@
           <div class="row">
             <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3" >
               <div class="tile show0"  id="water">
-                <img src="img/icons/png/water0.png" alt="Dry" class="tile-image big-illustration show0">
-                <img src="img/icons/png/water1.png" alt="Wetting" class="tile-image big-illustration show1">
+                <img src="img/icons/png/water1.png" alt="Dry" class="tile-image big-illustration show1">
+                <img src="img/icons/png/water0.png" alt="Wetting" class="tile-image big-illustration show0">
                 <h3 class="tile-title">Diapers Status</h3>
-                <p class="show0">Dry</p>
-                <p class="show1">Wetting</p>
+                <p class="show1">Dry</p>
+                <p class="show0">Wetting</p>
                 <span class="showdata"></span>
                
               </div>
@@ -284,7 +284,7 @@ $("#shake").click(function(){
 
       sendAJAX(
             "/accounts/"+config.target.accountId+"/data/search",
-            '{"from":-86400,"targetFilter":{"deviceList":["0e-43-2c-c4-ac-72"]},"metrics":[{"id":"7b19036b-6e39-4335-b2c4-c7958291ddb5","op":"none"},{"id":"temp","op":"none"},{"id":"4d79d5c7-1454-4643-a140-eb8a91e51451","op":"none"},{"id":"water","op":"none"},{"id":"d8713db7-c4b2-4bcb-b6b6-190963914c1d","op":"none"},{"id":"zpos","op":"none"},{"id":"2d7691b1-d664-47d7-959a-4dcfd9398551","op":"none"},{"id":"sound","op":"none"}],"maxItems":100}'
+            '{"from":-30,"targetFilter":{"deviceList":["0e-43-2c-c4-ac-72"]},"metrics":[{"id":"7b19036b-6e39-4335-b2c4-c7958291ddb5","op":"none"},{"id":"temp","op":"none"},{"id":"4d79d5c7-1454-4643-a140-eb8a91e51451","op":"none"},{"id":"water","op":"none"},{"id":"d8713db7-c4b2-4bcb-b6b6-190963914c1d","op":"none"},{"id":"zpos","op":"none"},{"id":"2d7691b1-d664-47d7-959a-4dcfd9398551","op":"none"},{"id":"sound","op":"none"}],"maxItems":100}'
 
             ,
             function(msg){
@@ -302,25 +302,40 @@ $("#shake").click(function(){
 
   $.each( data.series, function( key, value ) {
      
-     //$(".tile").eq(key).find("p").text(value.points[0].value);
     
-     $(".tile").eq(key).find(".showdata").text(String(value.points[0].value))
-    
-    if(key==2){
+    pointsvalue=value.points.pop().value;
+     $(".tile").eq(key).find(".showdata").text(parseInt(pointsvalue))
+    if(key==0){
+
       $(".tile").eq(key).removeClass("show0 show1 show2");
-      if(value.points[0].value<10) {
+      if(pointsvalue>0.5) {
         $(".tile").eq(key).addClass("show"+1);
-      } else if(value.points[0].value>30) {
+      }else{
+        $(".tile").eq(key).addClass("show"+0);
+      }
+
+    }else if(key==1){
+     $(".tile").eq(key).removeClass("show0 show1 show2");
+      if(pointsvalue<-10) {
+        $(".tile").eq(key).addClass("show"+1);
+      }else{
+        $(".tile").eq(key).addClass("show"+0);
+      }
+
+    }else if(key==2){
+      $(".tile").eq(key).removeClass("show0 show1 show2");
+      if(pointsvalue<10) {
+        $(".tile").eq(key).addClass("show"+1);
+      } else if(pointsvalue>30) {
         $(".tile").eq(key).addClass("show"+2);
       }else{
         $(".tile").eq(key).addClass("show"+0);
       }
     
 
-
     }else if(key==3){
       $(".tile").eq(key).removeClass("show0 show1 show2");
-     if(value.points[0].value>300) {
+     if(pointsvalue>300) {
       $(".tile").eq(key).addClass("show"+1);
       }else{
         $(".tile").eq(key).addClass("show"+0);
@@ -329,10 +344,6 @@ $("#shake").click(function(){
     }else if(key==4){
      //do nothing
       
-    }else{
-      $(".tile").eq(key).removeClass("show0 show1 show2");
-      $(".tile").eq(key).addClass("show"+value.points[0].value);
-
     }
      
      
