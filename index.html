@@ -319,7 +319,7 @@ $("#shake").click(function(){
      $(".tile").eq(key).removeClass("show0 show1 show2");
       if(pointsvalue<-10) {
         $(".tile").eq(key).addClass("show"+1);
-        $("#alert").play();
+        $("#alert")[0].play();
       }else{
         $(".tile").eq(key).addClass("show"+0);
       }
@@ -330,7 +330,7 @@ $("#shake").click(function(){
         $(".tile").eq(key).addClass("show"+1);
       } else if(pointsvalue>30) {
         $(".tile").eq(key).addClass("show"+2);
-        $("#alert").play();
+        $("#alert")[0].play();
       }else{
         $(".tile").eq(key).addClass("show"+0);
       }
@@ -340,7 +340,7 @@ $("#shake").click(function(){
       $(".tile").eq(key).removeClass("show0 show1 show2");
      if(pointsvalue>500) {
       $(".tile").eq(key).addClass("show"+1);
-      $("#crying").play();
+      $("#crying")[0].play();
       }else{
         $(".tile").eq(key).addClass("show"+0);
       }
