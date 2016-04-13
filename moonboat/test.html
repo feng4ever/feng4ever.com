@@ -140,8 +140,7 @@ var config={
       "account": "account",
       "accountId":"ee4f618b-186c-44a0-89a7-aabb902b83e2",
       //neil"accountId":"31a379c5-a189-4097-b203-d994f1f48045",
-      "token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJqdGkiOiJkOWQyOTYwYy0zYmRkLTRjMTMtOTVmNy03NWQyZGE0NmZiNjQiLCJpc3MiOiJodHRwOi8vZW5hYmxlaW90LmNvbSIsInN1YiI6IjU3MDhmZDFlYjQyMWY4YzYzZTY2NzMwNCIsImV4cCI6IjIwMTYtMDQtMTFUMTM6MjM6NDAuMjY1WiJ9.R_wfLY0CzN0D507wn3sjjbb4vL6XPhr2ilpR529KhNc6-Inm7hnP33tRBmsqJu5UsCw2cW3JUqpB4_YzwkhhMQ2HW96dK-l0bIC0c3Zl5Y7Wiml5F-bQoUBQvArGuBQ4WAupI9UIZfBGv_I0Dy0rg3EfMCCz3d_U6gtvcpQ28zdgM2IUCRS-f-8-mtO4CbloCBkaHMvrca-V75H5yLO726yD1epPO0pxPq3WVk6kfTL7WsoSYPQYg1V-YbTTXStVFz7PWlvyjutZOF6Q6L5IVfIXrUuUwGwam2F9sgt9n8I05NsqrjKy5kUELBezVv9yAMn6TvUqYBMDtdOC5aOaSQ"
-    },
+           "token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJqdGkiOiJkMmJiMmI4YS03M2I4LTRlN2YtYjgyNS0zZDMwZWEwNzZmOTEiLCJpc3MiOiJodHRwOi8vZW5hYmxlaW90LmNvbSIsInN1YiI6IjU3MDhmZDFlYjQyMWY4YzYzZTY2NzMwNCIsImV4cCI6IjIwMTYtMDQtMTNUMTU6MTc6MjguNTEwWiJ9.u0tGELr6ov8xQKQBVCirOP-36e2xzC_cS_wU5bNIvj08kruFkWsP6uFqiIb1UZc5MbVEE5QYd7L6zPgZZZ8kMJqVLj8rtgL6DOH9qSFHmfgOyLEMjY4nk_JD3bm0gVVVVVRtsAMlEQFbDcrK0h6NKP7SzYV53xMDjfTYIoVvsRNOpmUy0oah4et819RdGzLOjXP75TS3NbJUpIdMVsfMhqEwcDKPZBYNM7rkbTDsYkMWAf77DI-u3AWDSc5SO9I33Z16AU603uKIwS3pRVytqcy-vUZDuG510coTKmhOa6aFLWsfKApBgbcm8pXg247ivZJIL2776Qlq9Wo2nwuePQ"    },
 
 
     "source": {
@@ -173,18 +172,11 @@ var config={
 
 
 
-if(!window.location.hash){
-  $("#login").hide();
-$("#dashboard").show();
-$("#shake").hide();
-  pullData();
-}else{
   $("#login").show();
 $("#dashboard").hide();
-$("#shake").hide();
+$("#shake").show();
 
 
-}
     
 
 $("#submit").click(function(){
