@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Moonboat</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="dist/css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="dist/css/flat-ui.css" rel="stylesheet">
+
+   
+
+    <style>
+    .tile img,.tile p{display:none;}
+    .show0 .show0,.show1 .show1,.show2 .show2{display:inline;}
+    .showdata{display:none;}
+    audio{display:none;}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+    <br/>
+
+   
+    <div class="row demo-row">
+        <div class="col-xs-12">
+          <nav class="navbar navbar-inverse navbar-embossed" role="navigation">
+            <div class="navbar-header">
+             
+              <a class="navbar-brand" ><img  src="img/IDF.png" /></a>
+              <a class="navbar-brand pull-right">Moon Boat Demo<a>
+            </div>
+          </nav><!-- /navbar -->
+        </div>
+      </div>
+      <div id="login">
+      <input id="password" type="text" value="" placeholder="Enter Password" class="form-control">
+      <br/>
+      <a id="submit"  class="btn btn-block btn-lg btn-primary">Login</a>
+       <br/> <br/>
+      </div>
+      <div class="row" id="dashboard">
+        <div class="col-lg-12">
+          <div class="row">
+            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3" >
+              <div class="tile show1"  id="water">
+              <img src="img/icons/png/water0.png" alt="Wet" class="tile-image big-illustration show0">
+                <img src="img/icons/png/water1.png" alt="Dry" class="tile-image big-illustration show1">
+                
+                <h3 class="tile-title">Diaper Status</h3>
+                <p class="show1">Dry</p>
+                <p class="show0">Wet</p>
+                <span class="showdata"></span>
+               
+              </div>
+            </div>
+
+            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+              <div class="tile show0" id="zpos">
+                <img src="img/icons/png/zpos0.png" alt="Infinity-Loop" class="tile-image show0">
+                <img src="img/icons/png/zpos1.png" alt="Infinity-Loop" class="tile-image show1">
+                <h3 class="tile-title">Sleeping Position</h3>
+                <p class="show0">All Right</p>
+                <p class="show1">Need Turn over</p>
+                 <span class="showdata"></span>
+              </div>
+            </div>
+
+            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+              <div class="tile show0" id="temp">
+                <img src="img/icons/png/temp0.png" alt="Pensils" class="tile-image show0">
+                <img src="img/icons/png/temp1.png" alt="Pensils" class="tile-image show1">
+                <img src="img/icons/png/temp2.png" alt="Pensils" class="tile-image show2">
+                <h3 class="tile-title">Temperature</h3>
+                <p class="show0">Comfortable</p>
+               	<p class="show1">Too Cold</p>
+               	<p class="show2">Too Warm</p>
+                 <span class="showdata"></span>
+              </div>
+            </div>
+
+            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+              <div class="tile show0" id="sound">
+                
+                <img src="img/icons/png/sound0.png" alt="Chat" class="tile-image show0">
+                 <img src="img/icons/png/sound1.png" alt="Chat" class="tile-image show1">
+                 
+                <h3 class="tile-title">Babyeep</h3>
+                <p class="show0">Silence</p>
+               	 <p class="show1">Noisy</p>
+                  <span class="showdata"></span>
+              </div>
+
+            </div>
+          </div> <!-- /row -->
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+              <div class="tile show0" id="shake">
+                <img src="img/icons/png/shake0.png" alt="Chat" class="tile-image show0">
+               <img src="img/icons/png/shake1.gif" alt="Chat" class="tile-image show1">
+                <h3 class="tile-title">Shake</h3>
+                <p class="show0">Good Dream...</p>
+                 <p class="show1">Let's Rock</p>
+                
+              </div>
+              
+            </div>
+            </div> <!-- /row -->
+        </div>
+      </div> <!-- /row -->
+      <p class="small">Powered By Intel® Enableiot <span id="ts"></span>
+      <a  href="http://feng4ever.com" class="pull-right"> @Chris.C </a>
+     
+      </p>
+    </div><!-- /.container -->
+ <audio src="alert.mp3" id="alert" play="false" />
+<audio src="crying.mp3" id="crying" play="false" />
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="dist/js/vendor/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="dist/js/flat-ui.min.js"></script>
+
+    
+
+<script type="text/javascript">
+
+
+$(function(){
+var data;
+var interval;
+var config={
+    "target": {
+      "host": "dashboard.us.enableiot.com",
+      "api_root": "/v1/api",
+      "username": "feng4ever@msn.com",
+      "password": "",
+      "account": "account",
+      "accountId":"ee4f618b-186c-44a0-89a7-aabb902b83e2",
+      //neil"accountId":"31a379c5-a189-4097-b203-d994f1f48045",
+      "token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJqdGkiOiJkOWQyOTYwYy0zYmRkLTRjMTMtOTVmNy03NWQyZGE0NmZiNjQiLCJpc3MiOiJodHRwOi8vZW5hYmxlaW90LmNvbSIsInN1YiI6IjU3MDhmZDFlYjQyMWY4YzYzZTY2NzMwNCIsImV4cCI6IjIwMTYtMDQtMTFUMTM6MjM6NDAuMjY1WiJ9.R_wfLY0CzN0D507wn3sjjbb4vL6XPhr2ilpR529KhNc6-Inm7hnP33tRBmsqJu5UsCw2cW3JUqpB4_YzwkhhMQ2HW96dK-l0bIC0c3Zl5Y7Wiml5F-bQoUBQvArGuBQ4WAupI9UIZfBGv_I0Dy0rg3EfMCCz3d_U6gtvcpQ28zdgM2IUCRS-f-8-mtO4CbloCBkaHMvrca-V75H5yLO726yD1epPO0pxPq3WVk6kfTL7WsoSYPQYg1V-YbTTXStVFz7PWlvyjutZOF6Q6L5IVfIXrUuUwGwam2F9sgt9n8I05NsqrjKy5kUELBezVv9yAMn6TvUqYBMDtdOC5aOaSQ"
+    },
+
+
+    "source": {
+      "deviceId": "0e-43-2c-c4-ac-72",
+      "gatewayId": "desired-device-id",
+      "name": "desired-device-name",
+      "tags": ["tag1", "tag2", "tag3"],
+      "loc": [ 45.5228, -122.9897, 75.2 ],
+      "attributes" : {
+        "manufacturer": "intel",
+        "platform": "x86",
+        "os": "linux"
+      }
+    },
+    "component": {
+      "type": "SampleComponentName.v1.0",
+      "name": "desired-sensor-name",
+      "cid": "desired-sensor-id"
+    },
+    "moonboat": {
+      "interval": 5000,
+
+    }
+
+}
+
+
+
+
+
+
+if(!window.location.hash){
+  $("#login").hide();
+$("#dashboard").show();
+$("#shake").hide();
+  pullData();
+}else{
+  $("#login").show();
+$("#dashboard").hide();
+$("#shake").hide();
+
+
+}
+    
+
+$("#submit").click(function(){
+  config.target.password=$("#password").val();
+  if(config.target.password){
+    getToken(
+      "/auth/token",
+      {"username": config.target.username,"password": config.target.password},
+        function(msg){
+          console.log(msg);
+          config.target.token=msg.token;
+          $("#login").hide();
+          $("#dashboard").show();
+          $("#shake").show();
+          pullData();
+          
+        }
+      );
+
+  }else{
+    pullData();
+    
+  }
+
+
+
+});
+
+$(".tile").click(function(){
+      $(this).find(".showdata").toggle();
+    });
+
+$("#shake").click(function(){
+    if($("#shake").hasClass("show0")){
+      controlMotor(1);
+    }else{
+      controlMotor(0);
+    }
+    });
+
+
+
+    function getToken(url,data,success) {
+        $.ajax({
+            type: "POST",
+            contentType: "application/x-www-form-urlencoded",
+            url: "https://"+config.target.host+config.target.api_root+url,
+            data: data,
+
+            success: success,
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+              alert("Login error");
+                $("#login").show();
+                $("#dashboard").hide();
+                $("#shake").hide();
+            }
+        });
+    }
+    function sendAJAX(url,data,success) {
+        $.ajax({
+            
+            type: "POST",
+            contentType: "application/json",
+            
+            url: "https://"+config.target.host+config.target.api_root+url,
+            data: data,
+            processData: false,
+            success: success,
+            headers: {
+            Authorization: "Bearer "+config.target.token
+            },
+
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                alert("Disconnected. ");
+                clearInterval(interval);
+                $("#login").show();
+                $("#dashboard").hide();
+                $("#shake").hide();
+            }
+        });
+    }
+    function controlMotor(e){
+      $(".tile").eq(4).removeClass("show0 show1 show2");
+      $(".tile").eq(4).addClass("show"+e);
+      sendAJAX(
+            "/accounts/"+config.target.accountId+"/control",
+            '{"commands":[{"componentId":"81589fc5-92ce-4e11-b4e7-aff15a7d76d2","transport":"mqtt","parameters":[{"name":"switch","value":"'+e+'"}]}],"complexCommands":[]}'
+            ,
+            function(msg){
+              console.log(msg);
+
+              }
+            )
+
+
+    }
+    function pullData(){
+
+      sendAJAX(
+            "/accounts/"+config.target.accountId+"/data/search",
+            '{"from":-30,"targetFilter":{"deviceList":["0e-43-2c-c4-ac-72"]},"metrics":[{"id":"7b19036b-6e39-4335-b2c4-c7958291ddb5","op":"none"},{"id":"temp","op":"none"},{"id":"4d79d5c7-1454-4643-a140-eb8a91e51451","op":"none"},{"id":"water","op":"none"},{"id":"d8713db7-c4b2-4bcb-b6b6-190963914c1d","op":"none"},{"id":"zpos","op":"none"},{"id":"2d7691b1-d664-47d7-959a-4dcfd9398551","op":"none"},{"id":"sound","op":"none"}],"maxItems":100}'
+
+            ,
+            function(msg){
+              console.log(msg);
+              displayData(msg);
+              interval=setTimeout(function(){
+                pullData();
+              },config.moonboat.interval)
+              }
+            )
+    }
+    function displayData(data){
+      $("#login").hide();
+       $("#dashboard").show();
+
+  $.each( data.series, function( key, value ) {
+     
+    
+    pointsvalue=value.points.pop().value;
+     $(".tile").eq(key).find(".showdata").text(parseInt(pointsvalue))
+    if(key==0){
+
+      $(".tile").eq(key).removeClass("show0 show1 show2");
+      if(pointsvalue>0.5) {
+        $(".tile").eq(key).addClass("show"+1);
+      }else{
+        $(".tile").eq(key).addClass("show"+0);
+      }
+
+    }else if(key==1){
+     $(".tile").eq(key).removeClass("show0 show1 show2");
+      if(pointsvalue<-10) {
+        $(".tile").eq(key).addClass("show"+1);
+        $("#alert")[0].play();
+      }else{
+        $(".tile").eq(key).addClass("show"+0);
+      }
+
+    }else if(key==2){
+      $(".tile").eq(key).removeClass("show0 show1 show2");
+      if(pointsvalue<10) {
+        $(".tile").eq(key).addClass("show"+1);
+      } else if(pointsvalue>30) {
+        $(".tile").eq(key).addClass("show"+2);
+        $("#alert")[0].play();
+      }else{
+        $(".tile").eq(key).addClass("show"+0);
+      }
+    
+
+    }else if(key==3){
+      $(".tile").eq(key).removeClass("show0 show1 show2");
+     if(pointsvalue>500) {
+      $(".tile").eq(key).addClass("show"+1);
+      $("#crying")[0].play();
+      }else{
+        $(".tile").eq(key).addClass("show"+0);
+      }
+      
+    }else if(key==4){
+     //do nothing
+      
+    }
+     
+     
+    });
+
+    }
+
+
+
+
+
+
+});
+</script>
+  </body>
+</html>
