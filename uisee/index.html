@@ -86,12 +86,22 @@
     #ticket-card p {
         text-align: center;
     }
-    #info-card  {
+    #info-card {
         width: 100%;
         position: fixed;
-        bottom: -100%;
+        top:-100%;
         left: 0;
         background-color: #FFFFFF;
+    }
+    .card-close{
+        position:absolute;
+        width:40px;
+        height:40px;
+        right:0;
+        top:0;
+        background:url("close.png");
+        background-size: cover;
+
     }
     </style>
 </head>
@@ -209,14 +219,18 @@
         window.Info = {
             initialize: function(el) {
                 this.el=el;
+                this.el.getElementsByTagName("span")[0].addEventListener('click', function(evt) {
+                    Info.hide();
+
+                })
 
             },
             show: function(msg) {
-                this.el.style.bottom="0px";
+                this.el.style.top="0px";
                 this.el.getElementsByTagName("p")[0].innerHTML=msg;
             },
             hide: function(){
-                this.el.style.bottom="-100%";
+                this.el.style.top="-100%";
             }
 
         }
@@ -274,9 +288,9 @@
                         cars.push(document.createElement("span"));
                         cars[i].className = "map-car";
                         cars[i].id = "car-" + i;
-                        cars.alt=response.vehicles[i].name;
+                        cars[i].name=response.vehicles[i].name;
                         cars[i].addEventListener('click',function(){
-                            Bar.show(this.id)
+                            Info.show(this.name)
                         })
                         Map.el.appendChild(cars[i]);
                     }
@@ -305,25 +319,22 @@
 
         window.Station = {
             initialize: function() {
-
                 Ajax.get(config.stationurl, "", function(response) {
-
                     var stations = new Array();
                     for (var i in response.vehicles) {
                         stations.push(document.createElement("span"));
                         stations[i].className = "map-station";
                         stations[i].id = "station-" + i;
+                        stations[i].name = "station-" + i;
                         stations[i].style.left = response.vehicles[i].data.location.lat * 100 + "%";
                         stations[i].style.top = response.vehicles[i].data.location.lon * 100 + "%";
                         stations[i].textContent = i;
                         stations[i].style.display = "block";
                         stations[i].addEventListener('click',function(){
-                            Bar.show(this.id)
+                            Info.show(this.name)
                         })
                         Map.el.appendChild(stations[i]);
                         console.log(stations[i])
-
-
                     }
                 }, function() {
 
