@@ -273,7 +273,8 @@
                     for (var i in response.vehicles) {
                         cars.push(document.createElement("span"));
                         cars[i].className = "map-car";
-                        cars[i].id = "car-" + response.vehicles[i].name;
+                        cars[i].id = "car-" + i;
+                        cars.alt=response.vehicles[i].name;
                         cars[i].addEventListener('click',function(){
                             Bar.show(this.id)
                         })
