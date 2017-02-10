@@ -6,30 +6,46 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>UISEE FUTURE</title>
     <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
+    <script src="json2.js"></script>
     <style>
-    #ticket-card {
-        width: 100%;
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        background-color: #FFFFFF;
-    }
+
     
     #map {
         position: absolute;
         width: 100%;
         left: 0;
+        margin: 0%;
         top: 0;
     }
     
+    #map canvas {
+        position: absolute;
+        width: 100%;
+    }
+    
     #map .map-car {
-        background: url("car.png");
+        background: url("car_disabled.png");
         position: absolute;
         width: 40px;
         height: 40px;
         margin: -20px;
         display: none;
-        background-size:cover;
+        background-size: cover;
+    }
+    
+    #map .map-station {
+        background: url("station.png");
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        text-align: center;
+        color: #FFFFFF;
+        font-weight: bold;
+        line-height: 32px;
+        margin-left: -20px;
+        margin-top: -38px;
+        display: none;
+        background-size: cover;
     }
     
     #map .map-mypos {
@@ -39,7 +55,7 @@
         height: 40px;
         margin: -20px;
         display: none;
-        background-size:cover;
+        background-size: cover;
     }
     
     #map .map-img {
@@ -53,7 +69,13 @@
         left: 0;
         padding: 16px;
     }
-    
+        #ticket-card {
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        background-color: #FFFFFF;
+    }
     #ticket-card button {
         margin-top: 16px;
         width: 100%;
@@ -64,11 +86,19 @@
     #ticket-card p {
         text-align: center;
     }
+    #info-card  {
+        width: 100%;
+        position: fixed;
+        bottom: -100%;
+        left: 0;
+        background-color: #FFFFFF;
+    }
     </style>
 </head>
 
 <body>
     <div id="map">
+        <canvas id="map-canvas"></canvas>
         <img class="map-img" id="map-img" src="map.png" alt="" />
     </div>
     <main>
@@ -89,6 +119,12 @@
                 </form>
             </section>
         </div>
+        <div class="mdc-card" id="info-card">
+            <span class="card-close"></span>
+            <section class="mdc-card__supporting-text">
+                    <p class="mdc-typography--body1">请使用手机收到的电子票码上车，当天有效</p>
+            </section>
+        </div>
         <div id="mdc-js-snackbar" class="mdc-snackbar" aria-live="assertive" aria-atomic="true" aria-hidden="true">
             <div class="mdc-snackbar__text"></div>
             <div class="mdc-snackbar__action-wrapper">
@@ -103,15 +139,42 @@
     <script>
     (function(global) {
         'use strict';
+        window.config = {
+            "ticketurl": "ticket.json",
+            "carsurl": "cars.json",
+            "stationurl": "station.json",
+            "trackingurl": "tracking.json",
+        }
         window.Map = {
             initialize: function(el) {
                 this.el = el;
+                this.canvas = el.getElementsByTagName("canvas")[0]
+                
             },
+            draw: function(points) {
+                this.context = this.canvas.getContext("2d");
+                this.context.lineWidth = 6
+                this.context.strokeStyle = "rgba(0,0,0,0.5)";
+                this.context.moveTo(points[0][0], points[0][1]);
+                for (var i in points) {
+                    this.context.lineTo(points[i][0], points[i][1]);
+                }
+                this.context.stroke();
+
+                this.context.lineWidth = 4
+                this.context.strokeStyle = "rgba(255,255,255,1)";
+                this.context.moveTo(points[0][0], points[0][1]);
+
+                for (var i in points) {
+                    this.context.lineTo(points[i][0], points[i][1]);
+                }
+                this.context.stroke();
+
+            },
+            redraw:function(points){
+            }
         }
-        window.config = {
-            "ticketurl": "ticket.json",
-            "carsurl": "cars.json"
-        }
+
 
         /*暂不提供当前位置
         if(navigator.geolocation){
@@ -143,7 +206,20 @@
             }
 
         }
+        window.Info = {
+            initialize: function(el) {
+                this.el=el;
 
+            },
+            show: function(msg) {
+                this.el.style.bottom="0px";
+                this.el.getElementsByTagName("p")[0].innerHTML=msg;
+            },
+            hide: function(){
+                this.el.style.bottom="-100%";
+            }
+
+        }
         window.Ticket = {
             initialize: function() {
                 //获取车票事件
@@ -180,50 +256,82 @@
                             }
                         },
                         1000);
-                    Bar.show(response);
+                    Bar.show(response.ticket);
                 }, function() {
                     evt.target.elements.mobile.disabled = 1;
                     evt.target.elements.submit.disabled = 1;
-                    Bar.show(response);
+
                 })
             }
 
         }
         window.Car = {
             initialize: function() {
-                Ajax.get(config.carsurl, "", function(response) {
+                Ajax.get(config.trackingurl, "", function(response) {
+
                     var cars = new Array();
-                    for (var i in response) {
+                    for (var i in response.vehicles) {
                         cars.push(document.createElement("span"));
                         cars[i].className = "map-car";
                         cars[i].id = "car-" + i;
+                        cars[i].addEventListener('click',function(){
+                            Bar.show(this.id)
+                        })
                         Map.el.appendChild(cars[i]);
                     }
                 }, function() {
-                    Bar.show(response);
+
                 })
                 this.refresh()
-                var interval=setInterval(function() {
+                var interval = setInterval(function() {
                     Car.refresh()
                 }, 1000);
             },
             refresh: function() {
-                Ajax.get(config.carsurl, "", function(response) {
-                    for (var i in response) {
-                        document.getElementById('car-' + i).style.left = gps2positon(response[i])[0];
-                        document.getElementById('car-' + i).style.top = gps2positon(response[i])[1];
-                        document.getElementById('car-' + i).style.transform = "rotate(" + gps2positon(response[i])[2] + ")";
+                Ajax.get(config.trackingurl, "", function(response) {
+                    for (var i in response.vehicles) {
+                        document.getElementById('car-' + i).style.left = response.vehicles[i].data.location.lat * 100 + "%";
+                        document.getElementById('car-' + i).style.top = response.vehicles[i].data.location.lon * 100 + "%";
+                        //document.getElementById('car-' + i).style.transform = "rotate(" + gps2positon(response[i])[2] + ")";
                         document.getElementById('car-' + i).style.display = "block";
                     }
-                    document.getElementById("car-amount").textContent = "当前" + response.length + "台可用车辆";
+                    document.getElementById("car-amount").textContent = "当前" + response.vehicles.length + "台可用车辆";
                 }, function() {
-                    Bar.show(response);
+
                 })
             }
         }
 
+        window.Station = {
+            initialize: function() {
 
-        
+                Ajax.get(config.stationurl, "", function(response) {
+
+                    var stations = new Array();
+                    for (var i in response.vehicles) {
+                        stations.push(document.createElement("span"));
+                        stations[i].className = "map-station";
+                        stations[i].id = "station-" + i;
+                        stations[i].style.left = response.vehicles[i].data.location.lat * 100 + "%";
+                        stations[i].style.top = response.vehicles[i].data.location.lon * 100 + "%";
+                        stations[i].textContent = i;
+                        stations[i].style.display = "block";
+                        stations[i].addEventListener('click',function(){
+                            Bar.show(this.id)
+                        })
+                        Map.el.appendChild(stations[i]);
+                        console.log(stations[i])
+
+
+                    }
+                }, function() {
+
+                })
+
+            },
+
+        }
+
         window.Ajax = {
 
             createXMLHTTPRequest: function() {
@@ -259,20 +367,23 @@
 
             get: function(URL, param, s, e) {
                 var req = this.createXMLHTTPRequest();
+
                 if (req) {
                     req.open("GET", URL + param, true);
                     req.onreadystatechange = function() {
                         if (req.readyState == 4) {
                             if (req.status == 200) {
-                                var response = eval(req.response)
-                                console.log(response[0])
-                                if (response[0]) {
-                                    s(response[1]);
+                                var response = JSON.parse(req.response)
+
+                                if (response.error_code) {
+                                    Bar.show("response.error_msg");
+                                    e(response);
                                 } else {
-                                    e(response[1])
+                                    s(response);
                                 }
                             } else {
-                                e("连接失败");
+                                Bar.show("连接失败");
+                                e();
                             }
                         }
                     }
@@ -289,15 +400,17 @@
                     req.onreadystatechange = function() {
                         if (req.readyState == 4) {
                             if (req.status == 200) {
-                                var response = eval(req.response)
-                                if (response[0]) {
-                                    s(response[1]);
+                                response = JSON.parse(req.response)
+                                if (response.error_code) {
+                                    Bar.show("response.error_msg");
+                                    e(response);
                                 } else {
-                                    e(response[1])
+                                    s(response);
                                 }
 
                             } else {
-                                e("连接失败");
+                                Bar.show("连接失败");
+                                e();
                             }
                         }
                     }
@@ -308,8 +421,10 @@
         window.app = {
             initialize: function() {
                 Bar.initialize(document.getElementById('mdc-js-snackbar'))
+                Info.initialize(document.getElementById('info-card'))
                 Map.initialize(document.getElementById('map'));
                 Car.initialize();
+                Station.initialize();
                 Ticket.initialize();
             }
         }
@@ -318,14 +433,14 @@
     })(this);
 
     function gps2positon(g) {
-            var p = new Array;
-            window
-            p[0] = g[0] / 360 * 100 + "%";
-            p[1] = g[1] / 563 * 100 + "%";
+        var p = new Array;
+        window
+        p[0] = g[0] / 360 * 100 + "%";
+        p[1] = g[1] / 563 * 100 + "%";
 
-            p[2] = g[2] + "deg";
-            return p;
-        }
+        p[2] = g[2] + "deg";
+        return p;
+    }
     </script>
 </body>
 
